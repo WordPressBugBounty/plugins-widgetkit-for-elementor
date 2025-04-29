@@ -7,5 +7,5 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'DrewM\\MailChimp\\' => array($vendorDir . '/drewm/mailchimp-api/src'),
-    'Appsero\\' => array($vendorDir . '/appsero/client/src', $vendorDir . '/appsero/updater/src'),
+    'Appsero\\' => array($vendorDir . '/appsero/updater/src', $vendorDir . '/appsero/client/src'),
 );

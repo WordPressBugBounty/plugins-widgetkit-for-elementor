@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'user/widgetkit-for-elementor',
-        'pretty_version' => 'v2.5.4',
-        'version' => '2.5.4.0',
-        'reference' => '3364cbb8945c6accd2fa3b71c992c7b96f453d82',
+        'pretty_version' => 'v2.5.5',
+        'version' => '2.5.5.0',
+        'reference' => '445a5b8ef5ca185987d3efec43f05af123204dc2',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -20,9 +20,9 @@
             'dev_requirement' => false,
         ),
         'appsero/updater' => array(
-            'pretty_version' => 'v2.3.1',
-            'version' => '2.3.1.0',
-            'reference' => '0e233fd177eba9cca67f94c5d65d8bb221384983',
+            'pretty_version' => 'v2.3.3',
+            'version' => '2.3.3.0',
+            'reference' => '0c899f2e6b5894b695751d738151a98461cdb198',
             'type' => 'library',
             'install_path' => __DIR__ . '/../appsero/updater',
             'aliases' => array(),
@@ -47,9 +47,9 @@
             'dev_requirement' => false,
         ),
         'user/widgetkit-for-elementor' => array(
-            'pretty_version' => 'v2.5.4',
-            'version' => '2.5.4.0',
-            'reference' => '3364cbb8945c6accd2fa3b71c992c7b96f453d82',
+            'pretty_version' => 'v2.5.5',
+            'version' => '2.5.5.0',
+            'reference' => '445a5b8ef5ca185987d3efec43f05af123204dc2',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),

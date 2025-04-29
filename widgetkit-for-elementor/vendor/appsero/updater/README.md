@@ -1,5 +1,5 @@
 # AppSero Client Updater
-### Version 1.0.0
+### Version 2.3.3
 
 - [Depency](#depency)
 - [Installation](#installation)

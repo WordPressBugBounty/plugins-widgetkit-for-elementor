@@ -20,6 +20,7 @@
                             'post_status'       => 'publish',
                             'posts_per_page'    => $settings['standard_post_show'],
                             'ignore_sticky_posts' => 1,
+                            // phpcs:ignore
                              'tax_query' => array( array(
                                 'taxonomy' => 'post_format',
                                 'field' => 'slug',
@@ -47,7 +48,7 @@
                                 <header class="entry-header">
                                     <h4 class="entry-title">
                                         <a href="<?php the_permalink();?>">
-                                            <?php esc_html_e(wp_trim_words( get_the_title(),4, ''), 'widgetkit-for-elementor'); ?>
+                                            <?php echo esc_html(wp_trim_words(get_the_title(), 4, '')); ?>
                                         </a>
                                     </h4>       
                                 </header><!-- .entry-header -->
@@ -75,14 +76,15 @@
                         'post_status'=>"publish",
                         'post_type'=>"post",
                         'orderby'=>"post_date",
-                               'tax_query' => array( array(
-                                        'taxonomy' => 'post_format',
-                                        'field' => 'slug',
-                                        'terms' => array('post-format-aside', 'post-format-gallery', 'post-format-link', 'post-format-image', 'post-format-quote', 'post-format-status', 'post-format-audio', 'post-format-chat', 'post-format-video'),
-                                        'operator' => 'NOT IN'
-                                       ) 
-                                    ),
-                        );
+                        // phpcs:ignore
+                        'tax_query' => array( array(
+                            'taxonomy' => 'post_format',
+                            'field' => 'slug',
+                            'terms' => array('post-format-aside', 'post-format-gallery', 'post-format-link', 'post-format-image', 'post-format-quote', 'post-format-status', 'post-format-audio', 'post-format-chat', 'post-format-video'),
+                            'operator' => 'NOT IN'
+                            ) 
+                        ),
+                    );
                     $postslist = get_posts( $args ); ?>
 
                 <?php foreach ($postslist as $post) :  setup_postdata($post); ?>
@@ -96,7 +98,7 @@
                                 <?php if ($settings['date_enable']): ?>
                                     
                                 <span class="date-format">
-                                   <?php esc_html_e(date_i18n((get_option('date_format'))), 'widgetkit-for-elementor'); ?>
+                                   <?php echo esc_html(date_i18n((get_option('date_format')))); ?>
                                 </span>
                                 <?php endif ?>
 
@@ -111,7 +113,9 @@
                                 </span>
                             <?php endif ?>
                              <h2 class="entry-header">
-                                 <a class="entry-title" href="<?php the_permalink();?>"><?php esc_html_e(wp_trim_words( get_the_title(),8, ''), 'widgetkit-for-elementor'); ?></a>
+                                 <a class="entry-title" href="<?php the_permalink();?>">
+                                    <?php echo esc_html(wp_trim_words(get_the_title(), 8, '')); ?>
+                                </a>
                             </h2>
                             <?php if ($settings['meta_position_2'] == 'bottom'):?>
                                 <span class="author-meta">
@@ -122,7 +126,7 @@
 
                             <?php if (!in_array(get_post_format(), $post_formats)):?>
                                 <div class="entry-content">
-                                    <p><?php esc_html_e(wp_trim_words( get_the_content(),35, ''), 'widgetkit-for-elementor'); ?></p>
+                                    <p><?php echo esc_html(wp_trim_words(get_the_content(), 35, '')); ?></p>
                                 </div><!-- .entry-content -->
                             <?php endif; ?>
                             
@@ -147,6 +151,7 @@
                             'post_status'       => 'publish',
                             'posts_per_page'    => $settings['standard_post_show'],
                             'ignore_sticky_posts' => 1,
+                            // phpcs:ignore
                              'tax_query' => array( array(
                                 'taxonomy' => 'post_format',
                                 'field' => 'slug',
@@ -174,7 +179,7 @@
                                 <header class="entry-header">
                                     <h4 class="entry-title">
                                         <a href="<?php the_permalink();?>">
-                                            <?php esc_html_e(wp_trim_words( get_the_title(),4, ''), 'widgetkit-for-elementor'); ?>
+                                            <?php echo esc_html(wp_trim_words(get_the_title(), 4, '')); ?>
                                         </a>
                                     </h4>       
                                 </header><!-- .entry-header -->
