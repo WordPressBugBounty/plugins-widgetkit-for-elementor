@@ -538,16 +538,12 @@ input:checked + .rectangle:before {
   color: #c7c7c7;
   font-size: 12px;
 }
-.wk-dashboard-wrapper .wk-main .wk-changelog .wk-changelog-list .wk-pro-changelog .version ul a[href="#new"] + ul > li {
-  border-bottom: solid 1px #dedede;
-  padding-bottom: 5px;
-}
 .wk-dashboard-wrapper .wk-main .wk-changelog .wk-changelog-list .wk-pro-changelog .version ul a[href="#new"] + ul > li:before {
   content: "New -";
   color: #32d296;
   margin-right: 3px;
 }
-.wk-dashboard-wrapper .wk-main .wk-changelog .wk-changelog-list .wk-pro-changelog .version ul a[href="#bugfix"] + ul > li {
+.wk-dashboard-wrapper .wk-main .wk-changelog .wk-changelog-list .wk-pro-changelog .version ul a[href="#new"] + ul > li {
   border-bottom: solid 1px #dedede;
   padding-bottom: 5px;
 }
@@ -556,7 +552,7 @@ input:checked + .rectangle:before {
   color: #e91e63;
   margin-right: 3px;
 }
-.wk-dashboard-wrapper .wk-main .wk-changelog .wk-changelog-list .wk-pro-changelog .version ul a[href="#improved"] + ul > li {
+.wk-dashboard-wrapper .wk-main .wk-changelog .wk-changelog-list .wk-pro-changelog .version ul a[href="#bugfix"] + ul > li {
   border-bottom: solid 1px #dedede;
   padding-bottom: 5px;
 }
@@ -564,6 +560,10 @@ input:checked + .rectangle:before {
   content: "Improved -";
   color: #9c27b0;
   margin-right: 3px;
+}
+.wk-dashboard-wrapper .wk-main .wk-changelog .wk-changelog-list .wk-pro-changelog .version ul a[href="#improved"] + ul > li {
+  border-bottom: solid 1px #dedede;
+  padding-bottom: 5px;
 }
 .wk-dashboard-wrapper .wk-main .wk-pro-license .wk-license-card ol {
   margin: 0;
@@ -647,13 +647,15 @@ input:checked + .rectangle:before {
   background-color: rgba(0, 0, 0, 0.7);
   align-items: center;
   justify-content: center;
-  visibility: hidden;
-  opacity: 0;
-  transition: all 0.3s ease-in 0s;
 }
 .widgetkit-templates-wrapper .wk-card .wk-card-media-top .widget-template-image-hover span.dashicons {
   color: #fff;
   font-size: 20px;
+}
+.widgetkit-templates-wrapper .wk-card .wk-card-media-top .widget-template-image-hover {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.3s ease-in 0s;
 }
 .widgetkit-templates-wrapper .wk-card .wk-card-body .widgetkit-library-template-name {
   font-size: 14px;
@@ -679,14 +681,14 @@ input:checked + .rectangle:before {
   max-height: 80vh;
   overflow-y: scroll;
 }
-.widgetkit-template-libray-single .widgetkit-single-template-wrapper .ele-template-importer {
-  position: relative;
-}
 .widgetkit-template-libray-single .widgetkit-single-template-wrapper .ele-template-importer.importing {
   padding-right: 25px;
 }
 .widgetkit-template-libray-single .widgetkit-single-template-wrapper .ele-template-importer.importing span {
   display: block;
+}
+.widgetkit-template-libray-single .widgetkit-single-template-wrapper .ele-template-importer {
+  position: relative;
 }
 .widgetkit-template-libray-single .widgetkit-single-template-wrapper .ele-template-importer span {
   display: none;
@@ -707,17 +709,17 @@ input:checked + .rectangle:before {
   border-radius: 0;
   max-width: 100%;
 }
-.widgetkit-template-libray-single .widgetkit-single-template-wrapper .page-import-form .button {
-  position: absolute;
-  top: 0;
-  right: 0;
-  margin-left: -5px;
-}
 .widgetkit-template-libray-single .widgetkit-single-template-wrapper .page-import-form .button.importing {
   padding-right: 25px;
 }
 .widgetkit-template-libray-single .widgetkit-single-template-wrapper .page-import-form .button.importing span {
   display: block;
+}
+.widgetkit-template-libray-single .widgetkit-single-template-wrapper .page-import-form .button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-left: -5px;
 }
 .widgetkit-template-libray-single .widgetkit-single-template-wrapper .page-import-form .button span {
   display: none;

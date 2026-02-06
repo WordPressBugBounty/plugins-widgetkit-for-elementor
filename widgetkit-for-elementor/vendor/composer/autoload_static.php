@@ -7,22 +7,22 @@ namespace Composer\Autoload;
 class ComposerStaticInit17635256d7a69aa87625891503924bec
 {
     public static $prefixLengthsPsr4 = array (
-        'D' => 
+        'D' =>
         array (
             'DrewM\\MailChimp\\' => 16,
         ),
-        'A' => 
+        'A' =>
         array (
             'Appsero\\' => 8,
         ),
     );
 
     public static $prefixDirsPsr4 = array (
-        'DrewM\\MailChimp\\' => 
+        'DrewM\\MailChimp\\' =>
         array (
             0 => __DIR__ . '/..' . '/drewm/mailchimp-api/src',
         ),
-        'Appsero\\' => 
+        'Appsero\\' =>
         array (
             0 => __DIR__ . '/..' . '/appsero/updater/src',
             1 => __DIR__ . '/..' . '/appsero/client/src',
@@ -30,9 +30,9 @@ class ComposerStaticInit17635256d7a69aa87625891503924bec
     );
 
     public static $prefixesPsr0 = array (
-        'P' => 
+        'P' =>
         array (
-            'Parsedown' => 
+            'Parsedown' =>
             array (
                 0 => __DIR__ . '/..' . '/erusev/parsedown',
             ),

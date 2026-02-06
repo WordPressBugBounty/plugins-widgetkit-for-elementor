@@ -2231,15 +2231,15 @@
   transform: translate3d(0, 0, 0);
 }
 
-.wkfe-search .wkfe-search-wrapper {
-  position: relative;
-}
 .wkfe-search .wkfe-search-wrapper .click-handler {
   cursor: pointer;
   display: inline-block;
 }
 .wkfe-search .wkfe-search-wrapper .search-click-handler svg {
   height: auto;
+}
+.wkfe-search .wkfe-search-wrapper {
+  position: relative;
 }
 .wkfe-search .wkfe-search-wrapper .wkfe-search-form-wrapper {
   position: absolute;
@@ -2254,12 +2254,12 @@
   align-items: center;
   justify-content: center;
 }
+.wkfe-search .wkfe-search-wrapper .wkfe-search-form-wrapper form input[type=text]:focus {
+  outline: none;
+}
 .wkfe-search .wkfe-search-wrapper .wkfe-search-form-wrapper form input[type=text] {
   border-radius: 2px 0px 0px 2px;
   width: auto;
-}
-.wkfe-search .wkfe-search-wrapper .wkfe-search-form-wrapper form input[type=text]:focus {
-  outline: none;
 }
 .wkfe-search .wkfe-search-wrapper .wkfe-search-form-wrapper form input[type=submit] {
   border-radius: 0px 2px 2px 0px;
@@ -2281,15 +2281,15 @@
   z-index: 9;
 }
 
-.wkfe-site-social .wkfe-site-social-wrapper {
-  position: relative;
-}
 .wkfe-site-social .wkfe-site-social-wrapper .click-handler {
   cursor: pointer;
   display: inline-block;
 }
 .wkfe-site-social .wkfe-site-social-wrapper .click-handler svg {
   height: auto;
+}
+.wkfe-site-social .wkfe-site-social-wrapper {
+  position: relative;
 }
 .wkfe-site-social .wkfe-site-social-wrapper .wkfe-site-social-platform-wrapper {
   position: absolute;
@@ -2736,12 +2736,12 @@
   color: #63b570;
   box-shadow: 0px 2px 2px #ddd;
 }
+.wk-gallery .content-overlay img {
+  width: 100%;
+}
 .wk-gallery .content-overlay {
   transition: all 0.3s ease;
   background: transparent;
-}
-.wk-gallery .content-overlay img {
-  width: 100%;
 }
 .wk-gallery .content-overlay.from-right:before {
   content: "";
@@ -2800,8 +2800,6 @@
 .wk-gallery .content-overlay .wk-gallery-body {
   color: #fff;
   background: transparent;
-  opacity: 0;
-  transition: all 0.3s ease;
 }
 .wk-gallery .content-overlay .wk-gallery-body .wk-card-title {
   font-size: 24px;
@@ -2809,6 +2807,10 @@
 }
 .wk-gallery .content-overlay .wk-gallery-body a {
   color: #fff;
+}
+.wk-gallery .content-overlay .wk-gallery-body {
+  opacity: 0;
+  transition: all 0.3s ease;
 }
 .wk-gallery .content-overlay .wk-gallery-body .gallery-lightbox a {
   display: inline-block;
@@ -7362,11 +7364,11 @@ body.logged-in .YouTubePopUp-Wrap {
   margin: 0;
   padding: 0;
 }
-.wk-adv-tabs-nav ul li {
-  list-style: none;
-}
 .wk-adv-tabs-nav ul li:last-child {
   margin-right: 0;
+}
+.wk-adv-tabs-nav ul li {
+  list-style: none;
 }
 .wk-adv-tabs-nav ul li a {
   display: block;

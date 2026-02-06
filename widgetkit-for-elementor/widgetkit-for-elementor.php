@@ -2,7 +2,7 @@
 /*
 Plugin Name: All-in-One Addons for Elementor - WidgetKit
 Description: Everything you need to create a stunning website with <strong>Elementor, WooCommerce, LearnDash, Sensei & LearnPress</strong> and more.
-Version: 2.5.6
+Version: 2.5.9
 Text Domain: widgetkit-for-elementor
 Author: Themesgrove
 Author URI: https://themesgrove.com
@@ -21,7 +21,7 @@ WC tested up to: 9.5.1
  */
 if (!defined('ABSPATH')) exit;
 
-define('WK_VERSION', '2.5.6');
+define('WK_VERSION', '2.5.9');
 define('WK_FILE', __FILE__);
 define('WK_PATH', plugin_dir_path(__FILE__));
 
@@ -81,7 +81,6 @@ class WidgetKit_For_Elementor
 
     public function plugin_setup()
     {
-        $this->load_text_domain();
         $this->load_admin_files();
         if (is_admin()) {
             $this->check_dependency();
@@ -92,16 +91,14 @@ class WidgetKit_For_Elementor
         require_once(WK_PATH . 'includes/appsero-init.php');
         require_once(WK_PATH . 'includes/widgetkit-pro-init.php');
         require_once(WK_PATH . 'includes/elements.php');
+        require_once(WK_PATH . 'includes/helper.php');
         require_once(WK_PATH . 'includes/widgetkit-admin-resources.php');
+        require_once(WK_PATH . 'includes/pro-features.php');
 
         WKFE_Appsero_Init::init();
         WKFE_PRO_Init::init();
         WKFE_Elements::init();
         WKFE_Admin_Resources::init();
-    }
-    public function load_text_domain()
-    {
-        load_plugin_textdomain('widgetkit-for-elementor');
     }
 
     public function elementor_init()

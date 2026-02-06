@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'user/widgetkit-for-elementor',
-        'pretty_version' => 'v2.5.6',
-        'version' => '2.5.6.0',
-        'reference' => 'cc10039c1c978eac7c687a99c0272c2c2c58e014',
+        'pretty_version' => 'V2.5.9',
+        'version' => '2.5.9.0',
+        'reference' => '18d71cc1c99770ce5c391ae411fa31c48d19dfee',
         'type' => 'library',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -47,9 +47,9 @@
             'dev_requirement' => false,
         ),
         'user/widgetkit-for-elementor' => array(
-            'pretty_version' => 'v2.5.6',
-            'version' => '2.5.6.0',
-            'reference' => 'cc10039c1c978eac7c687a99c0272c2c2c58e014',
+            'pretty_version' => 'V2.5.9',
+            'version' => '2.5.9.0',
+            'reference' => '18d71cc1c99770ce5c391ae411fa31c48d19dfee',
             'type' => 'library',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
