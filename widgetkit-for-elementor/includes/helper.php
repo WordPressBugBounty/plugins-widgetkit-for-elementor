@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if (! function_exists('wk_element_get_settings')) {
     function wk_element_get_settings($option_name, $element = null) {
         $elements = get_option($option_name);
@@ -9,7 +13,9 @@ if (! function_exists('wk_element_get_settings')) {
 if (! function_exists('wk_get_pro_notice')) {
     function wk_get_pro_notice()
     {
-        $img_src     = esc_url(WK_URL . 'assets/images/pro.png');
+        // dist/, not assets/: assets/ is build source and does not ship, so this
+        // was a broken image on every install that was not a checkout.
+        $img_src     = esc_url(WK_URL . 'dist/images/pro.png');
         $upgrade_url = esc_url('https://themesgrove.com/widgetkit-for-elementor/');
 
         return sprintf(

@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 
 use Elementor\Utils;
 use Elementor\Group_Control_Image_Size;
@@ -15,8 +19,9 @@ $id = $this->get_id();
                 <ul class="wk-grid-<?php echo esc_attr($contents['column_gap']); ?> 
                       wk-slider-items 
                       wk-child-width-1-<?php echo esc_attr($contents['item_column']); ?>@l
-                      wk-child-width-1-<?php echo esc_attr(is_int($contents['item_column_tablet'])) ? esc_attr($contents['item_column_tablet']) : 2; ?>@m 
-                      wk-child-width-1-<?php echo esc_attr(is_int($contents['item_column_mobile'])) ? esc_attr($contents['item_column_mobile']) : 1; ?>@s" wk-grid>
+                      <?php /* isset() first: the is_int() guard was reading the very key it guards, which is an "Undefined array key" warning on every render for a control that has never been set. */ ?>
+                      wk-child-width-1-<?php echo isset($contents['item_column_tablet']) && is_int($contents['item_column_tablet']) ? esc_attr($contents['item_column_tablet']) : 2; ?>@m 
+                      wk-child-width-1-<?php echo isset($contents['item_column_mobile']) && is_int($contents['item_column_mobile']) ? esc_attr($contents['item_column_mobile']) : 1; ?>@s" wk-grid>
                 <?php endif; ?>
                 <?php if ($contents['item_option'] == 'custom_post') : ?>
                     <?php foreach ($contents['custom_content'] as $content) : ?>

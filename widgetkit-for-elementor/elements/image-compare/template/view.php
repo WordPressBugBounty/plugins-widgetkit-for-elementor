@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     $image_compare = $this->get_settings();
     $id = $this->get_id();
 ?>

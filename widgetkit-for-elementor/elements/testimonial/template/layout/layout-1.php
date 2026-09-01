@@ -1,4 +1,8 @@
-<?php 
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+ 
 use Elementor\Group_Control_Image_Size;
 ?>
 <div class="wk-flex wk-flex-center wk-grid-match">

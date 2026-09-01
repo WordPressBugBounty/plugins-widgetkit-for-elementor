@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     $tilt_box = $this->get_settings();
     $content_overlay_position = $tilt_box['content_overlay_position'];
     $id = $this->get_id();
@@ -82,27 +86,37 @@
 
     <?php if ($tilt_box['effect_enable'] == 'yes'):?> 
 
-        <?php 
+        <?php
+            /*
+             * dist/, not assets/. assets/ is build SOURCE and is not in the release
+             * zip, so this 404'd on every install that was not a developer's
+             * checkout — and the only symptom was a tilt effect that did nothing.
+             *
+             * The init used to be a bare inline <script> printed right here, while
+             * the library was deferred into the footer: the call ran first and
+             * threw "VanillaTilt is not defined" every time. wp_add_inline_script
+             * attaches it to the handle, so WordPress prints it immediately after
+             * the library, in the right order, wherever the library ends up.
+             */
             wp_enqueue_script(
                 'vanilla-tilt',
-                plugins_url('assets/js/vanilla-tilt.min.js', WK_FILE),
-                array(), // No dependencies
-                '1.7.0', // Version number
-                array(
-                    'strategy' => 'defer', // Load script in footer
-                    'in_footer' => true
+                WK_URL . 'dist/js/vanilla-tilt.min.js',
+                array(),
+                WK_VERSION,
+                true
+            );
+
+            wp_add_inline_script(
+                'vanilla-tilt',
+                sprintf(
+                    'document.addEventListener("DOMContentLoaded", function () {
+                        var el = document.querySelector("#wk-tilt-%s .tilt-element");
+                        if ( el && window.VanillaTilt ) { VanillaTilt.init(el, { max: 25, speed: 400 }); }
+                    });',
+                    esc_js( $id )
                 )
             );
         ?>
-
-        <script type="text/javascript">
-            VanillaTilt.init(document.querySelector("#wk-tilt-<?php echo esc_attr($id);?> .tilt-element"), {
-                max: 25,
-                speed: 400,
-        });
-        
-
-        </script>
     <?php endif; ?>
     <script type="text/javascript">
         jQuery(function($){

@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     use Elementor\Icons_Manager;
     $settings = $this->get_settings();
     $search_icon_alignment = widgetkit_for_elementor_array_get($settings, 'search_icon_alignment');

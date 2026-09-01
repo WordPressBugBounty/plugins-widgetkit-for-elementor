@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 $settings = $this->get_settings();
 $form_input_placeholder_text = widgetkit_for_elementor_array_get($settings, 'placeholder_text');
 $form_button_text = widgetkit_for_elementor_array_get($settings, 'button_text');

@@ -1,30 +1,30 @@
-=== All-in-One Addons for Elementor - WidgetKit ===
+=== WidgetKit for Elementor – Lightweight Elementor Addons, Widgets & Templates ===
 
 Contributors: Themesgrove, parvezvai, themexpert
 Donate link: https://themesgrove.com/
-Tags: elementor widgets, woocommerce addons, learndash addons, learnpress addons, sensei addons
-Requires at least: 5.0
-Tested up to: 6.9
+Tags: elementor addons, elementor widgets, elementor templates, page builder, elementor woocommerce
+Requires at least: 6.0
+Tested up to: 7.1
 Stable tag: 2.5.10
 Requires PHP: 7.0
 License: GPL3
 License URI: https://www.gnu.org/licenses/gpl-3.0.txt
 
 
-Build stunning websites with Elementor using premium widgets for WooCommerce, LearnDash & LearnPress. Free creative, content & dynamic widget pack.
+Lightweight Elementor addons with 40+ widgets & templates. Conditional loading keeps your site fast. Built for marketers, not just coders.
 
 == Description ==
-If <a href="https://wordpress.org/plugins/elementor/">Elementor page builder</a> elements are not enough, try WidgetKit Addon and boost your page building experience. More than 55+ creative elements come with WidgetKit. You will be able to come out from the boundary of ordinary design and do something creative. 
+WidgetKit is a **lightweight Elementor addons** plugin that gives you **40+ Elementor widgets** and ready-made templates — without slowing down your site. Unlike heavier Elementor addons, WidgetKit loads only the CSS and JavaScript for the widgets you actually use on each page, so your <strong>Core Web Vitals</strong> stay green.
 
-Merge WidgetKit with Elementor and take the experience of ultimate page building. Build any layout in the shortest time, doesn't matter whether the layout is simple or complex. If you can think it, you can build it with WidgetKit.
+Built for **marketers and non-designers**: drag, drop, done. No code, no bloat. If you can picture the layout, you can build it with WidgetKit and <a href="https://wordpress.org/plugins/elementor/">Elementor page builder</a> — from landing pages and pricing tables to portfolios, blogs, WooCommerce stores and LMS course sites.
 
 https://www.youtube.com/watch?v=7sh13OCwZ4A
 
-<a href="https://wordpress.org/plugins/elementor/">Elementor</a> is a great tool for building websites, but without proper addons, it might take more time and money. Even sometimes you do not get your preferred layouts and sections in spite of using premium addons.
+== Lightweight & Fast (Core Web Vitals Friendly) ==
+Most Elementor addons load all of their CSS and JavaScript on every page, whether you use a widget or not. WidgetKit does the opposite: each page loads **only** the assets for the widgets on it. Fewer requests, less code, faster pages — better rankings and happier visitors, with no plugin janitor work.
 
-We aim to enhance your experience, it does not matter whether you are a developer or a designer. Our goal is to give you the perfect tool that is built for WordPress professionals.
-
-You can only decide to use WidgetKit after viewing it by yourself.
+== Elementor Addons for Marketers & Beginners ==
+You should not need to be a developer to build a fast, professional site. Every WidgetKit widget is drag-and-drop with clear, plain-language controls, so marketers, small-business owners and designers can ship landing pages, lead-gen sections and store pages without touching code.
 
 ##<a href="http://widgetkit.themesgrove.com/">Check Live Demo</a>
 
@@ -54,8 +54,8 @@ We have brought the brand new template library available for both WidgetKit Pro 
 <strong>Device Responsive</strong>
 Widgetkit is entirely device responsive. Your sections built with WidgetKit will always look the same on every device.
 
-<strong>Uncompromisable Performance</strong>
-Widgetkit is developed with professional experienced developers. Therefore no messy codes or extra resources are loaded to slow down your site.
+<strong>Lightweight & Fast — Conditional Asset Loading</strong>
+WidgetKit only loads the CSS and JavaScript for the widgets used on each page, instead of loading everything everywhere. That means fewer HTTP requests, a smaller page weight, and Core Web Vitals that stay green — the fastest way to keep your Elementor site quick.
 
 <strong><a href="https://widgetkit.themesgrove.com/lottie-animations/" target="_blank">Lottifiles Animation (New)</a></strong>
 WidgetKit has brought the brand new Lottie animation element, which lets you make your site attractive with lots of animations. Use the link or JSON files from the lottiefiles and make elegant sections with cool animations instantly. Check out this video and do it yourself now.
@@ -63,10 +63,10 @@ WidgetKit has brought the brand new Lottie animation element, which lets you mak
 https://youtu.be/roC1bZMJrWo
 
 
-<strong>Woocommerce Integration & Elements</strong>
+<strong>Elementor WooCommerce Widgets</strong>
 WidgetKit is not limited to general elements but it also allows you to customize your web store built with WooCommerce. There are four dedicated elements Woo Products, Woo Product Carousel, Woo Categories, Woo Recent Product. With these elements, you can highlight and manage your product more effectively and thus boost your sales.
 
-<strong>Lms Integration & Elements</strong>
+<strong>Elementor LMS Widgets (LearnDash, LearnPress & Sensei)</strong>
 If you are creating an education site you can make it more lucrative with WidgetKit. It doesn't matter if you are using an LMS as WidgetKit provides integration and elements for popular 3 lms's – LearnDash, Sensei & LearnPress. Be free and customize your site according to your own will with WidgetKit.
 
 <strong>Dedicated Support</strong>
@@ -75,7 +75,7 @@ Widgetkit team is always ready to aid you in your queries and problem regarding 
 ##<a href="http://widgetkit.themesgrove.com/">Check Live Demo</a>
 
 
-== 28+ Free Elements And Counting ==
+== Free Elementor Widgets (40+ and Counting) ==
 
 <ol>
 <li><a href="https://widgetkit.themesgrove.com/animated-headline">Animated Headline</a> - Create elegant headlines with the help of Animated Headline element. Your selected text will animate in different ways with and visitors will be attracted easily.</li>
@@ -251,8 +251,20 @@ If you like WidgetKit plugin, then consider checking out our other WordPress pro
 
 == FAQ ==
 
+= Do Elementor addons slow down your site? =
+Most do, because they load all of their CSS and JavaScript on every page. WidgetKit is built the opposite way: it loads only the assets for the widgets used on each page, so your pages stay light and your Core Web Vitals stay green.
+
+= Is WidgetKit a good lightweight alternative to other Elementor addons? =
+Yes. If you want Elementor widgets and templates without the page-weight of heavier addon packs, WidgetKit is designed to be fast first — conditional asset loading, clean markup, and drag-and-drop widgets built for marketers and non-designers.
+
+= How do I add widgets like a countdown timer, pricing table or testimonial in Elementor? =
+Install WidgetKit, open the Elementor editor, and drag the widget (Countdown, Pricing Table, Testimonial, Advanced Heading and 40+ more) onto your page. No code needed.
+
+= Which page builder does WidgetKit work with? =
+WidgetKit is an addon for the Elementor page builder. Install Elementor (free) first, then WidgetKit adds its widgets and templates to the Elementor editor.
+
 = Is WidgetKit compatible with any WordPress themes? =
-Yes of course! WidgetKit will work with any WordPress themes. 
+Yes of course! WidgetKit will work with any WordPress themes.
 
 = Is WidgetKit fully free? =
 Yes! WidgetKit is absolutely free and provided to you by Themesgrove. There is no hidden charge if you wish you can give a small donation.
@@ -262,17 +274,22 @@ Widgetkit turns your theme functions to widgets and replaces code with a visual 
 
 = What are the requirements to use Widgetkit? =
 Minimum Requirements
-WordPress version 4.0 or greater.
-Elementor version 1.5 or greater.
-PHP version 5.4 or greater.
+WordPress version 6.0 or greater.
+Elementor version 3.0 or greater.
+PHP version 7.0 or greater.
 
-= Recommended Requirements = 
+= Recommended Requirements =
 The latest version of WordPress.
 The latest version of Elementor.
-PHP 5.4 or greater.
+PHP 7.4 or greater.
 
 
 == Changelog ==
+= 2.5.10 =
+Fix - Admin menu pointed at a 404; the WidgetKit settings screen is reachable from the menu again.
+Fix - WordPress.org Plugin Check compliance: direct file access protection, text domain corrections, and readme headers.
+Tweak - GSAP animation scripts now load only on pages that use the text animation, instead of on every Elementor page.
+
 = 2.5.9 =
 Fix - Minimal Fix
 

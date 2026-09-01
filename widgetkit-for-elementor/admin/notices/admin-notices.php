@@ -1,4 +1,8 @@
-<?php 
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+ 
 
 // Ads for ThriveDesk
 add_action('admin_notices', 'wk_td_admin_ads');

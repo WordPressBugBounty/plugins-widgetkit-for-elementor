@@ -1,5 +1,26 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     $contact_form = $this->get_settings();
+    /*
+     * Defaults for the keys this template reads unconditionally.
+     *
+     * get_settings() only returns what the control stack produced, so a widget
+     * saved before a control existed — or one placed with no settings at all —
+     * has no key here, and reading it is an "Undefined array key" warning on
+     * every render. It is a warning rather than an error, so the page still
+     * renders and nobody notices until they read the log.
+     */
+    $contact_form = array_merge(
+        array(
+            'button_align'      => '',
+            'button_width_type' => '',
+            'contact_form_list' => '',
+        ),
+        is_array( $contact_form ) ? $contact_form : array()
+    );
     $id = $this->get_id();
     use Elementor\Icons_Manager;
 ?>

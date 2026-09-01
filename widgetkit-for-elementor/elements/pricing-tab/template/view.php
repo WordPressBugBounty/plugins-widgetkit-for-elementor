@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     // Pricing tab
     $settings = $this->get_settings();
     $counter = 0;

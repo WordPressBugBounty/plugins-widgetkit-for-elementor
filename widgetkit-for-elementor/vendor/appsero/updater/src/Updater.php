@@ -66,7 +66,7 @@ class Updater
 
         return self::$instance;
     }
-
+    
     /**
      * Set up WordPress filter hooks to get plugin updates
      *
@@ -74,7 +74,14 @@ class Updater
      */
     public function run_plugin_hooks()
     {
-        add_action('admin_init', [$this, 'check_plugin_update']);
+        // Register on every request, not only in wp-admin. WordPress rebuilds the
+        // update_plugins transient from the wp_update_plugins cron event, which drives
+        // auto-updates and never fires admin_init; registering these inside admin_init
+        // left the plugin out of that transient and blanked its Automatic Updates column.
+        add_filter( 'pre_set_site_transient_update_plugins', [ $this, 'check_plugin_update' ] );
+        add_filter( 'plugins_api', [ $this, 'plugins_api_filter' ], 10, 3 );
+
+        add_action( 'admin_init', [ $this, 'admin_init' ] );
     }
 
     /**
@@ -88,55 +95,53 @@ class Updater
     }
 
     /**
+     * Initialize the admin-only hooks
+     *
+     * @return void
+     */
+    public function admin_init() {
+        $this->show_warning_notice();
+    }
+
+    /**
      * Check for plugin updates
      *
-     * @param object $transient_data
-     * @return object
+     * @param stdClass|bool $transient_data
+     * @return stdClass
      */
-    public function check_plugin_update($transient_data)
-    {
+    public function check_plugin_update( $transient_data ) {
         global $pagenow;
 
-        if (!is_object($transient_data)) {
+        if ( ! is_object( $transient_data ) ) {
             $transient_data = new stdClass();
         }
 
-        if ('plugins.php' === $pagenow && is_multisite()) {
-            return $transient_data;
-        }
-
-        if (!empty($transient_data->response) && !empty($transient_data->response[$this->client->basename])) {
+        if ( 'plugins.php' === $pagenow && is_multisite() ) {
             return $transient_data;
         }
 
         $version_info = $this->get_version_info();
 
-        if (false !== $version_info && is_object($version_info) && isset($version_info->new_version)) {
-            unset($version_info->sections);
+        if ( $version_info && is_object( $version_info ) && ! empty( $version_info->new_version ) ) {
+            unset( $version_info->sections );
 
-            // If new version available, set to response
-            if (version_compare($this->client->project_version, $version_info->new_version, '<')) {
-                $required_plugins = isset($version_info->required_plugins) && (is_array($version_info->required_plugins) || is_object($version_info->required_plugins))
-                ? $version_info->required_plugins
-                : [];
+            $key = version_compare( $this->client->project_version, $version_info->new_version, '<' )
+                ? 'response'
+                : 'no_update';
 
-                $warnings = $this->check_required_plugins($required_plugins);
-
-                if (!empty($warnings)) {
-                    $this->show_warning_notice($warnings);
-                } else {
-                    $transient_data->response[$this->client->basename] = $version_info;
-                    add_filter('pre_set_site_transient_update_plugins', function () use ($transient_data) {
-                        return $transient_data;
-                    });
-                    add_filter('plugins_api', [$this, 'plugins_api_filter'], 10, 3);
-                }
-            } else {
-                $transient_data->no_update[$this->client->basename] = $version_info;
+            if ( 'response' === $key && empty( $version_info->package ) ) {
+                // AppSero omits the package when the license is not active. Without a package
+                // WP_Automatic_Updater retries the update on every cron run and emails the admin
+                // each time it fails, so opt the entry out of unattended updates. Core still
+                // renders the update row and its "automatic update is unavailable" notice, which
+                // is the correct prompt to renew the license. Only meaningful on a response entry:
+                // WP_Automatic_Updater::should_update() never sees no_update.
+                $version_info->disable_autoupdate = true;
             }
 
+            $transient_data->{$key}[ $this->client->basename ] = $version_info;
             $transient_data->last_checked = time();
-            $transient_data->checked[$this->client->basename] = $this->client->project_version;
+            $transient_data->checked[ $this->client->basename ] = $this->client->project_version;
         }
 
         return $transient_data;
@@ -258,7 +263,20 @@ class Updater
             return $data;
         }
 
-        return $this->get_version_info();
+        $version_info = $this->get_version_info();
+
+        if (false === $version_info || !is_object($version_info)) {
+            return $data;
+        }
+
+        // WP core (install_plugin_install_status) reads $api->version; AppSero returns
+        // new_version, so mirror it to avoid "Undefined property: version" and the
+        // version_compare(null) deprecation on PHP 8.
+        if (!isset($version_info->version) && isset($version_info->new_version)) {
+            $version_info->version = $version_info->new_version;
+        }
+
+        return $version_info;
     }
 
     /**
@@ -374,15 +392,50 @@ class Updater
     /**
      * Show warning notice for required plugins
      *
-     * @param array $warnings
      * @return void
      */
-    public function show_warning_notice($warnings)
-    {
-        add_action("after_plugin_row_{$this->client->basename}", function ($plugin_file, $plugin_data, $status) use ($warnings) {
-            $this->add_custom_plugin_row($plugin_file, $plugin_data, $status, $warnings);
-        }, 10, 3);
-    }
+    protected function show_warning_notice() {
+        $version_info = $this->get_version_info();
+        if ( false === $version_info || ! is_object( $version_info ) || ! isset( $version_info->new_version ) ) {
+            return;
+        }
+
+        unset( $version_info->sections );
+
+        // If no new version is available, return early
+        if ( version_compare( $this->client->project_version, $version_info->new_version, '>=' ) ) {
+            return;
+        }
+
+            $required_plugins = isset( $version_info->required_plugins ) && ( is_array( $version_info->required_plugins ) || is_object( $version_info->required_plugins ) )
+                ? $version_info->required_plugins
+                : [];
+
+            $warnings = $this->check_required_plugins( $required_plugins );
+
+        if ( empty( $warnings ) ) {
+            return;
+        }
+
+        add_filter(
+            'site_transient_update_plugins',
+            function ( $transient ) {
+                if ( ! is_object( $transient ) || empty( $transient->response ) || empty( $transient->response[ $this->client->basename ] ) ) {
+                    return $transient;
+                }
+
+                unset( $transient->response[ $this->client->basename ] );
+
+                return $transient;
+            }
+        );
+
+        add_action(
+            "after_plugin_row_{$this->client->basename}", function ( $plugin_file, $plugin_data, $status ) use ( $warnings ) {
+                $this->add_custom_plugin_row( $plugin_file, $plugin_data, $status, $warnings );
+            }, 10, 3
+        );
+	}
 
     /**
      * Add custom plugin row with warnings

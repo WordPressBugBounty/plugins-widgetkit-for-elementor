@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     $settings = $this->get_settings();
     $text = widgetkit_for_elementor_array_get($settings, 'tweet_text');
     $icon = widgetkit_for_elementor_array_get($settings, 'tweet_button_icon');

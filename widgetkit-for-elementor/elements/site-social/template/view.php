@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     use Elementor\Icons_Manager;
     $settings = $this->get_settings();
     $social_icon_picker_for_handler = widgetkit_for_elementor_array_get($settings, 'social_icon_picker_for_handler');

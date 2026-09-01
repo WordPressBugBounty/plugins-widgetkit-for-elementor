@@ -119,6 +119,7 @@
 			data: {
 				action: 'wk_pro_activate_license_key',
 				license: wkProLicenseKey,
+				nonce: settings.security_nonce,
 			},
             success: function( response ) {
 				if('true' == response){
@@ -149,6 +150,7 @@
 			type: 'post',
 			data: {
 				action: 'wk_pro_deactivate_license',
+				nonce: settings.security_nonce,
 			},
             success: function( response ) {
 				if('true' == response ){

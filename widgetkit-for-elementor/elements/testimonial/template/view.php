@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 use Elementor\Group_Control_Image_Size;
 $testimonials = $settings = $this->get_settings(); 
 $id = $this->get_id();

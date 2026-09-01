@@ -15,7 +15,7 @@ class WKFE_Addons_Integration{
     public function __construct(){
         add_action( 'elementor/frontend/after_register_styles', array( $this, 'widgetkit_register_frontend_styles' ) );
         add_action( 'elementor/frontend/after_register_scripts', array( $this, 'widgetkit_register_frontend_scripts' ) );
-        add_action( 'elementor/frontend/before_enqueue_scripts', array( $this, 'widget_scripts' ) );
+        add_action( 'elementor/frontend/before_render', array( $this, 'maybe_enqueue_text_animation' ) );
     }
     
     public function widgetkit_register_frontend_styles(){
@@ -55,6 +55,23 @@ class WKFE_Addons_Integration{
         wp_register_script( 'image-compare', WK_URL.'dist/js/jquery.image-compare.js' , array('jquery'), WK_VERSION, true);
         wp_register_script( 'youtube-popup', WK_URL.'dist/js/youtube-popup.js' , array('jquery'), WK_VERSION, true);
 
+        /*
+         * The GSAP text-animation stack. Registered, not enqueued: it is 136 KB
+         * and drives the wk_text_animation control, which is a pro feature set on
+         * individual elements. It used to be enqueued on
+         * elementor/frontend/before_enqueue_scripts, which fires for every page
+         * Elementor renders — so every visitor to every Elementor page paid for
+         * it, and on a free-only install (where the control does not even exist)
+         * it was pure dead weight. maybe_enqueue_text_animation() below pulls it
+         * in only for a page that actually uses the animation. The dependency
+         * chain is declared so the effect script always has gsap and its plugins.
+         */
+        wp_register_script( 'gsap-js', WK_URL . 'dist/js/gsap.min.js', array( 'jquery' ), WK_VERSION, true );
+        wp_register_script( 'ScrollTrigger-js', WK_URL . 'dist/js/ScrollTrigger.min.js', array( 'gsap-js' ), WK_VERSION, true );
+        wp_register_script( 'ScrollToPlugin-js', WK_URL . 'dist/js/ScrollToPlugin.min.js', array( 'gsap-js' ), WK_VERSION, true );
+        wp_register_script( 'SplitText-js', WK_URL . 'dist/js/SplitText.min.js', array( 'gsap-js' ), WK_VERSION, true );
+        wp_register_script( 'wk-animation-effect-js', WK_URL . 'dist/js/wk-animation-effect.js', array( 'jquery', 'gsap-js', 'ScrollTrigger-js', 'ScrollToPlugin-js', 'SplitText-js' ), WK_VERSION, true );
+
         $js_info = [
             'ajax_url' => admin_url('admin-ajax.php'),
             'wkfe_security_nonce' => wp_create_nonce('wkfe-ajax-security-nonce')
@@ -62,11 +79,30 @@ class WKFE_Addons_Integration{
         wp_localize_script('widgetkit-main', 'wkfelocalizesettings', $js_info);
     }
 
-    public function widget_scripts() {
-            wp_enqueue_script('gsap-js', WK_URL . 'dist/js/gsap.min.js', array('jquery'), WK_VERSION, true);
-            wp_enqueue_script('SplitText-js', WK_URL . 'dist/js/SplitText.min.js', array('jquery'), WK_VERSION, true);
-            wp_enqueue_script('ScrollTrigger-js', WK_URL . 'dist/js/ScrollTrigger.min.js', array('jquery'), WK_VERSION, true);
-            wp_enqueue_script('ScrollToPlugin-js', WK_URL . 'dist/js/ScrollToPlugin.min.js', array('jquery'), WK_VERSION, true);
-            wp_enqueue_script('wk-animation-effect-js', WK_URL . 'dist/js/wk-animation-effect.js', array('jquery'), WK_VERSION, true);
+    /**
+     * Enqueue the text-animation stack only for an element that uses it.
+     *
+     * Runs per element as Elementor renders it. The animation is driven by the
+     * `wk_text_animation` setting; an element without it — which is every element
+     * on a page that has no WidgetKit animation, and every element on a free-only
+     * install — needs none of the 136 KB. Enqueuing here, during render, still
+     * lands the scripts in the footer, so nothing is lost by the later call.
+     *
+     * @param \Elementor\Element_Base $element The element being rendered.
+     * @return void
+     */
+    public function maybe_enqueue_text_animation( $element ) {
+        if ( ! is_object( $element ) || ! method_exists( $element, 'get_settings_for_display' ) ) {
+            return;
+        }
+
+        $animation = $element->get_settings_for_display( 'wk_text_animation' );
+
+        if ( empty( $animation ) ) {
+            return;
+        }
+
+        /* Depends on the whole GSAP chain, so this one handle pulls it all. */
+        wp_enqueue_script( 'wk-animation-effect-js' );
     }
 }

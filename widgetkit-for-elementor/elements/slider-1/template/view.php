@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 // Silence pro 1
 use Elementor\Utils;
 $settings = $this->get_settings();

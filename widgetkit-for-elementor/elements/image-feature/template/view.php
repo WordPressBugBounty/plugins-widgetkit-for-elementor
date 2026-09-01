@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 // Silence is golden.
     use Elementor\Icons_Manager;
     $settings = $this->get_settings();

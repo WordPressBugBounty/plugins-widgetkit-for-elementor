@@ -72,19 +72,31 @@ class WKFE_Elements{
          */
         $get_active_component_from_db = get_option( 'widgetkit_save_settings', $widgetkit_default_settings );
         /**
-         * if any diff found from db
-         * then merge with load key
-         * and update the db
+         * Fill in any key the stored option does not have yet, and write it back.
+         *
+         * The comparison is $defaults against $db, in that order, and the order is
+         * the whole point. array_diff_key($db, $defaults) — which this was —
+         * answers "what does the site have that we no longer ship", i.e. widgets
+         * that have been REMOVED. It is empty in the case that actually happens:
+         * a site whose settings were saved before a new widget existed. So no
+         * merge ran, and every conditional below read a key that was not there —
+         * an "Undefined array key" warning per new widget on PHP 8, and the widget
+         * silently not loading, because null is falsy.
+         *
+         * Every site that had ever visited the settings page lost each new widget
+         * this way until it saved that page again.
          */
-        if(array_diff_key($get_active_component_from_db, $widgetkit_default_settings)){
-            $merged_arr = array_merge($widgetkit_default_settings, $get_active_component_from_db);
-            update_option('widgetkit_save_settings', $merged_arr);
+        if ( array_diff_key( $widgetkit_default_settings, $get_active_component_from_db ) ) {
+            $get_active_component_from_db = array_merge( $widgetkit_default_settings, $get_active_component_from_db );
+            update_option( 'widgetkit_save_settings', $get_active_component_from_db );
         }
-        /**
-         * get the updated data from db
+        /*
+         * Not re-read from the database. get_option() is cached per request, and
+         * on the request that just wrote the merged value the cache may or may not
+         * have been primed with it — which made the fix above work intermittently.
+         * The merged array is the answer; use it.
          */
-
-        $check_component_active = get_option( 'widgetkit_save_settings', $widgetkit_default_settings );
+        $check_component_active = $get_active_component_from_db;
 
         if( $check_component_active['widget-animation-text'] ) {
             require_once WK_PATH . '/elements/animation-text/widget.php';

@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 
 class Widgetkit_Admin
 {
@@ -172,7 +176,29 @@ class Widgetkit_Admin
 	        'widgetkit-settings',
 	        array($this, 'display_settings_pages'),
 	        plugins_url('/assets/images/wk-icon-white.svg', __FILE__ ), 55
-        ); 
+        );
+
+        /*
+         * The parent, added as its own first submenu item.
+         *
+         * WordPress links a top-level menu to its FIRST submenu entry as soon as
+         * one exists. Without this line, pro's Template Library became that first
+         * entry, so clicking "WidgetKit" opened the Template Library and the
+         * settings screen — this page, the one the menu is named after — was not
+         * reachable from the menu at all.
+         *
+         * Same slug as the parent on purpose: that is how WordPress is told the
+         * parent has a page of its own.
+         */
+        add_submenu_page(
+            'widgetkit-settings',
+            __( 'WidgetKit Settings', 'widgetkit-for-elementor' ),
+            __( 'Settings', 'widgetkit-for-elementor' ),
+            'manage_options',
+            'widgetkit-settings',
+            array($this, 'display_settings_pages')
+        );
+
         if(!apply_filters('wkpro_enabled', false)):
         add_submenu_page( 
             'widgetkit-settings', 

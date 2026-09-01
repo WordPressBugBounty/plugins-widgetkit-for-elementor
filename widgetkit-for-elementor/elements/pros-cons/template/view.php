@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
     $settings = $this->get_settings();
     $alignment = widgetkit_for_elementor_array_get($settings, 'layout_align');
     $title = widgetkit_for_elementor_array_get($settings, 'feature_title');
